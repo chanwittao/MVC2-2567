@@ -1,11 +1,14 @@
-from model import FoodModel
-
 class FoodController:
-    def __init__(self):
-        self.model = FoodModel()
+    def __init__(self, model):
+        self.model = model
 
     def validate_and_check(self, food_id):
         """ ตรวจสอบรหัสอาหาร และเช็ควันหมดอายุ """
+        if not food_id.isdigit() or len(food_id) != 6:
+            return "⚠️ รหัสสินค้าไม่ถูกต้อง! กรุณากรอกตัวเลข 6 หลัก"
+        if food_id[0] == "0":
+            return "⚠️ รหัสสินค้าไม่ถูกต้อง! รหัสห้ามขึ้นต้นด้วยเลข 0"
+
         food = self.model.get_food_by_id(food_id)
         if not food:
             return "❌ ไม่พบข้อมูลอาหารนี้ในระบบ"

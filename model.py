@@ -1,10 +1,11 @@
 import sqlite3
 from datetime import datetime, timedelta
 import logging
-from utils import setup_logger
 
 # ตั้งค่าระบบ Log
-logger = setup_logger("food_model.log")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("FoodModel")
+
 
 class FoodModel:
     def __init__(self, db_path="food.db"):
